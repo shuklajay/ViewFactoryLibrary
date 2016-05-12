@@ -1,0 +1,8 @@
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/obj/Release/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/bin/Release/FactoryLib.dll.mdb
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/bin/Release/FactoryLib.dll
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/obj/Release/FactoryLib.dll
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/obj/Release/FactoryLib.dll.mdb
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/bin/Release/Xamarin.Forms.Core.dll
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/bin/Release/Xamarin.Forms.Xaml.dll
+/Users/jayparikh/RnD/FactoryLib/FactoryLib/bin/Release/Xamarin.Insights.dll
