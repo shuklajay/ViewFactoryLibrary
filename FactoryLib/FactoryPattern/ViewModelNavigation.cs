@@ -14,10 +14,10 @@ namespace FactoryLib
 			this.implementor = implementor;
 		}
 
-		public void Push (Page page)
+		public async void Push (Page page)
 		{
 
-			implementor.Navigation.PushAsync (page);
+			await implementor.Navigation.PushAsync (page);
 		}
 
 		public void Push<TViewModel> ()
@@ -26,19 +26,31 @@ namespace FactoryLib
 			Push (ViewFactory.CreatePage<TViewModel> ());
 		}
 
-		public void Pop ()
+		public async void Pop ()
 		{
-			implementor.Navigation.PopAsync ();
+			await implementor.Navigation.PopAsync ();
 		}
 
-		public void PopToRoot ()
+		public async Task PopToRoot ()
 		{
-			implementor.Navigation.PopToRootAsync ();
+			await implementor.Navigation.PopToRootAsync ();
 		}
 
-		public void PushModal (Page page)
+
+		public void InsertPageBfor<TViewModel, TViewModel1> () where TViewModel : BaseViewModel
+		where TViewModel1 : BaseViewModel
 		{
-			implementor.Navigation.PushModalAsync (page);
+			implementor.Navigation.InsertPageBefore (ViewFactory.CreatePage<TViewModel> (), ViewFactory.CreatePage<TViewModel1> ());
+		}
+
+		//public void InsertPage (Page pageBefore, Page pageTo)
+		//{
+		//	implementor.Navigation.InsertPageBefore (pageBefore, pageTo);
+		//}
+
+		public async void PushModal (Page page)
+		{
+			await implementor.Navigation.PushModalAsync (page);
 		}
 
 		public void PushModal<TViewModel> ()
@@ -47,18 +59,18 @@ namespace FactoryLib
 			PushModal (ViewFactory.CreatePage<TViewModel> ());
 		}
 
-		public void PopModal ()
+		public async void PopModal ()
 		{
 			var modalParent = implementor;
 			while (modalParent.Parent as Page != null)
 				modalParent = (Page)modalParent.Parent;
-			implementor.Navigation.PopModalAsync ();
+			await implementor.Navigation.PopModalAsync ();
 		}
 
 		public async Task RemoveAsync<TViewModel> (TViewModel viewModel, bool animated = true)
 			where TViewModel : BaseViewModel
 		{
-			try {               
+			try {
 				foreach (var page in this.implementor.Navigation.NavigationStack) {
 					if (Convert.ToString (page.BindingContext) == Convert.ToString (viewModel)) {
 						// If the page is on top of the stack it must be popped first
@@ -66,7 +78,7 @@ namespace FactoryLib
 							await this.implementor.Navigation.PopAsync ();
 						}
 						// Clear the view model/bindings
-						page.BindingContext = null;                     
+						page.BindingContext = null;
 						// Remove the page from the stack
 						this.implementor.Navigation.RemovePage (page);
 						return;
@@ -79,7 +91,7 @@ namespace FactoryLib
 
 		public IReadOnlyList<Page> NavigationStack ()
 		{
-			return  this.implementor.Navigation.NavigationStack;
+			return this.implementor.Navigation.NavigationStack;
 		}
 	}
 }

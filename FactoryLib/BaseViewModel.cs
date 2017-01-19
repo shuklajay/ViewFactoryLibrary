@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace FactoryLib
 {
-	public class BaseViewModel :  INotifyPropertyChanged
+	public class BaseViewModel : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged implementation
 
@@ -47,6 +47,7 @@ namespace FactoryLib
 		{
 			this.m_title = string.Empty;
 			this.m_ImageBackGround = string.Empty;
+
 		}
 
 		public ViewModelNavigation Navigation { get; set; }
