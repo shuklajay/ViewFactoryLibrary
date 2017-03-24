@@ -43,11 +43,6 @@ namespace FactoryLib
 			implementor.Navigation.InsertPageBefore (ViewFactory.CreatePage<TViewModel> (), ViewFactory.CreatePage<TViewModel1> ());
 		}
 
-		//public void InsertPage (Page pageBefore, Page pageTo)
-		//{
-		//	implementor.Navigation.InsertPageBefore (pageBefore, pageTo);
-		//}
-
 		public async void PushModal (Page page)
 		{
 			await implementor.Navigation.PushModalAsync (page);
@@ -92,6 +87,18 @@ namespace FactoryLib
 		public IReadOnlyList<Page> NavigationStack ()
 		{
 			return this.implementor.Navigation.NavigationStack;
+		}
+
+		public async Task<bool> FindPageFromStack (Page page)
+		{
+			bool t = false;
+			foreach (var item in this.implementor.Navigation.NavigationStack) {
+				if (Convert.ToString (item.BindingContext.GetType ().Name) == page.BindingContext.GetType ().Name) {
+					t = true;
+					break;
+				}
+			}
+			return t;
 		}
 	}
 }
